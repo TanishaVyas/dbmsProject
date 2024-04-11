@@ -5,133 +5,110 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <link rel="stylesheet" href="style.css" />
-        <style>* {
-                padding: 0;
-                margin: 0;
-                box-sizing: border-box;
-            }
-            body {
-                font-family: sans-serif;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                min-height: 100vh;
-                background: url(bg.jpg);
-                background-repeat: no-repeat;
-                background-size: cover;
-            }
-
-            .form {
-                background: rgba(0, 0, 0, 0.7);
-                padding: 20px 15px;
-                min-height: 250px;
-            }
-
-            input {
-                display: block;
-                outline: none;
-                padding: 15px 10px;
-                margin: 30px;
-                border: solid 1px transparent;
-                background: none;
-                color: white;
-                width: 200px;
-                transition: border-color 1s;
-            }
-
-            input:focus {
-                border-color: royalblue;
-            }
-
-            .form button {
-                padding: 10px;
-                color: white;
-                background: royalblue;
-                border: none;
-                width: 200px;
-                margin-left: 30px;
-                transition: 0.2s;
-                cursor: pointer;
-            }
-            .form button:hover {
-                background: rgb(114, 149, 255);
-            }
-
-            .action {
-                color: white;
-                text-align: center;
-                font-size: 18px;
-                margin: 30px;
-                text-transform: uppercase;
-                font-weight: bold;
-            }
-            .load {
-                position: relative;
-                margin: 2px 5px;
-                padding-bottom: 5px;
-                border-bottom: solid 2px transparent;
-                cursor: pointer;
-                transition: 0.5s;
-            }
-            .load.show {
-                border-bottom-color: royalblue;
-            }
-
-            .form a {
-                color: white;
-                text-decoration: none;
-                display: block;
-                margin: 15px;
-                text-align: center;
-                transition: 0.5s;
-            }
-            .form a:hover {
-                color: royalblue;
-            }
-
-            .login {
-                display: none;
-            }
-            .reg {
-                display: none;
-            }
-
-            .show-page {
-                display: block;
-                animation: show-page 1s;
-            }
-
-            @keyframes show-page {
-                0% {
-                    opacity: 0;
-                }
-                100% {
-                    opacity: 1;
-                }
-            }
-        </style>
         <title>Registration page</title>
     </head>
     <body>
         <form action="/Register" method="post" name="register"  class="form">
             <div class="action">
-                <span class="load show" id="login-action" onclick="openLoginPage()"
-                      >Register</span
-                >
+                <div style="width: 100%; height: 100%; position: relative; background: white">
+    <div style="width: 606px; height: 662px; left: 196px; top: 183px; position: absolute">
+        <div style="width: 321px; height: 179px; left: 0px; top: 0px; position: absolute">
+            <div style="left: 0px; top: 0px; position: absolute; color: black; font-size: 64px; font-family: Poppins; font-weight: 600; word-wrap: break-word">Sign Up  </div>
+            <div style="width: 321px; height: 54px; left: 0px; top: 125px; position: absolute">
+                <div style="width: 321px; left: 0px; top: 0px; position: absolute; color: black; font-size: 16px; font-family: Poppins; font-weight: 400; word-wrap: break-word">If you already have an account </div>
+                <div style="width: 308px; left: 0px; top: 30px; position: absolute"><span style="color: black; font-size: 16px; font-family: Poppins; font-weight: 400; word-wrap: break-word">You can </span><a href="/login" style="color: #4D47C3; font-weight: 600;">Login here!</a></div>
+            </div>
+        </div>
+    </div>
+        <div style="width: 313px; height: 556px; left: 485px; top: 235px; position: absolute">
+        <img src="https://chroniclestrategy.com/static/media/hero.98739928cc2d916b91e1.png" alt="Image" style="width: 313px; height: 556px; left: 0px; top: 0px; position: absolute" />
+        </div>
+    <div style="width: 369px; height: 543px; left: 892px; top: 100px; position: absolute">
+        <div  class="login show-page">
+        <div style="width: 369px; height: 62px; left: 0px; top: 73px; position: absolute">
+    <div style="width: 369px; height: 62px; position: absolute;">
+    <input id="email" name="email" type="text" style="width: 100%; height: 100%; background: #F0EFFF; border-radius: 8px; border: none;padding-left: 13px;padding-right: 13px;" placeholder="Enter Email">
+    <style>
+        #email::placeholder {
+            color: #a7a3ff;
+        }</style>
+    </div>
+        </div>
+
+        <div style="width: 369px; height: 62px; left: 0px; top: 153px; position: absolute">
+            <div style="width: 369px; height: 62px; left: 0px; top: 0px; position: absolute;">
+    <div style="width: 369px; height: 62px; position: absolute;">
+        <input id="username" name="username" type="text" style="width: 100%; height: 100%; background: #F0EFFF; border-radius: 8px; border: none; padding-left: 13px;padding-right: 13px;" placeholder="Enter Username">
+        <style>
+            #username::placeholder {
+                color: #a7a3ff;
+            }
+        </style>
+    </div>
+</div>
+        </div>
+        <div style="width: 369px; height: 62px; left: 0px; top: 233px; position: absolute">
+            <div style="width: 369px; height: 62px; left: 0px; top: 0px; position: absolute;">
+    <div style="width: 369px; height: 62px; position: absolute;">
+        <input id="contact" name="contact" type="text" style="width: 100%; height: 100%; background: #F0EFFF; border-radius: 8px; border: none; padding-left: 13px;padding-right: 13px;" placeholder="Enter Contact Number">
+        <style>
+            #contact::placeholder {
+                color: #a7a3ff;
+            }
+        </style>
+    </div>
+</div>
+
+        </div>
+        <div style="width: 369px; height: 62px; left: 0px; top: 394px; position: absolute">
+            <div style="width: 369px; height: 62px; left: 0px; top: 0px; position: absolute;">
+    <div style="width: 369px; height: 62px; position: absolute;">
+        <input id="password" name="password" type="password" style="width: 100%; height: 100%; background: #F0EFFF; border-radius: 8px; border: none; padding-left: 13px;padding-right: 13px;" placeholder="Confirm Password">
+        <style>
+            #password::placeholder {
+                color: #a7a3ff;
+            }
+        </style>
+    </div>
+</div>
+</div>
+        <div style="width: 369px; height: 62px; left: 0px; top: 313px; position: absolute">
+            <div style="width: 369px; height: 62px; left: 0px; top: 0px; position: absolute;">
+    <div style="width: 369px; height: 62px; position: absolute;">
+        <input id="password" name="password" type="password" style="width: 100%; height: 100%; background: #F0EFFF; border-radius: 8px; border: none; padding-left: 13px;padding-right: 13px;" placeholder="Password">
+        <style>
+            #password::placeholder {
+                color: #a7a3ff;
+            }
+        </style>
+    </div>
+</div>
+
+        </div>
+        <div style="width: 369px; height: 59px; left: 0px; top: 484px; position: absolute">
+            <div style="width: 369px; height: 59px; left: 0px; top: 0px; position: absolute">
+                <div style="width: 369px; height: 59px; left: 0px; top: 0px; position: absolute">
+    <a href="/login" style="text-decoration: none;">
+        <div style="width: 369px; height: 59px; left: 0px; top: 0px; position: absolute; background: #4D47C3; box-shadow: 0px 4px 61px rgba(77, 71, 195, 0.40); border-radius: 9px;padding-left: 13px;padding-right: 13px;"></div>
+        <div style="left: 158px; top: 18px; position: absolute; color: white; font-size: 16px; font-family: Poppins; font-weight: 500; word-wrap: break-word;">Register</div>
+    </a>
+</div>
 
             </div>
-            <div  class="login show-page">
-                <input  name="Username" type="text" placeholder="Username" />
-                <input name="Email" type="email" placeholder="Email" />
-                <input name ="Phone" type="Phone" placeholder="Phone Number" />
-                <input name ="Password" type="password" placeholder="Password" />
-                <select name="userRole"> 
-                    <option value ="Seller">Seller</option>
-                    <option value="Customer">Customer</option>
-                </select>
-                <button>Register</button>
-                <a href = "/login">Login</a>
+        </div>
+        <div style="left: 0px; top: 0px; position: absolute; color: black; font-size: 30px; font-family: Poppins; font-weight: 500; word-wrap: break-word">Sign Up</div>
+        <div style="width: 200px; height: 0px; left: 140px; top: 0px; position: absolute">
+                <div style="width: 200px; height: 40px; position: absolute;">
+                    <!-- Insert the select element for user roles here -->
+                    <select name="userRole" style="width: 100%; height: 100%; background: #4D47C3;color: white; border-radius: 8px; border: none; padding-left: 13px;padding-right: 13px">
+                        <option value="Seller">Seller</option>
+                        <option value="Customer">Customer</option>
+                    </select>
+                </div>
             </div>
+    </div>
+           </div>
+                </div>
         </form>
     </body>
     <script>
