@@ -90,14 +90,14 @@ public class UsersDAO {
         Connection connection = ConnectionConfigs.getConnection();
         List<Product> productList = new ArrayList<>();
         try {
-            CallableStatement cs = connection.prepareCall("{call GetAllProductsBySellerId(?)}");
+            CallableStatement cs = connection.prepareCall("call GetAllProductsBySellerId(?)");
             cs.setString(1, seller_id);
             ResultSet rs = cs.executeQuery();
             while (rs.next()) {
                 Product product = new Product();
-                product.setId(rs.getInt("id"));
+                product.setId(rs.getInt("product_id"));
                 product.setName(rs.getString("name"));
-                product.setPrize(rs.getInt("prize"));
+                product.setPrize(rs.getInt("price"));
                 product.setStock(rs.getInt("stock"));
                 product.setSeller(rs.getInt("seller_id"));
                 productList.add(product);
@@ -107,6 +107,7 @@ public class UsersDAO {
         } finally {
             // Close your connection here (if necessary)
         }
+        System.out.println("Number of products: " + productList.size());
         return productList;
     }
 

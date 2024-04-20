@@ -17,22 +17,19 @@ public class Product {
     private Integer stock;
     private Integer Seller;
 
-    
     @Override
     public String toString() {
         return "Product{" + "id=" + id + ", name=" + name + ", prize=" + prize + ", stock=" + stock + ", Seller=" + Seller + '}';
     }
 
-    
-    
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 29 * hash + Objects.hashCode(this.id);
-        hash = 29 * hash + Objects.hashCode(this.name);
-        hash = 29 * hash + Objects.hashCode(this.prize);
-        hash = 29 * hash + Objects.hashCode(this.stock);
-        hash = 29 * hash + Objects.hashCode(this.Seller);
+        hash = 59 * hash + Objects.hashCode(this.id);
+        hash = 59 * hash + Objects.hashCode(this.name);
+        hash = 59 * hash + Objects.hashCode(this.prize);
+        hash = 59 * hash + Objects.hashCode(this.stock);
+        hash = 59 * hash + Objects.hashCode(this.Seller);
         return hash;
     }
 
@@ -63,9 +60,6 @@ public class Product {
         return Objects.equals(this.Seller, other.Seller);
     }
 
-    
-    
-    
     public Integer getId() {
         return id;
     }

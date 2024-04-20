@@ -1,9 +1,3 @@
-<%-- 
-    Document   : sellersection
-    Created on : 15-Apr-2024, 3:55:28 PM
-    Author     : meetu
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -19,8 +13,10 @@
                     <div id="another-div" style="padding-left: 32px; justify-content: flex-start; align-items: center; gap: 14px; display: inline-flex">
 
                         <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 12px; display: inline-flex">
-                            <div id="full-name-display" style="color: #191F33; font-size: 20px; font-family: Nunito; font-weight: 600; line-height: 20px; word-wrap: break-word">Seller Name</div>
-                            <div style="color: #767E94; font-size: 14px; font-family: Nunito; font-weight: 400; line-height: 20px; word-wrap: break-word">Seller</div>
+                            <div id="full-name-display" style="color: #191F33; font-size: 20px; font-family: Nunito; font-weight: 600; line-height: 20px; word-wrap: break-word">Seller</div>
+                            <%-- 
+                                <div style="color: #767E94; font-size: 14px; font-family: Nunito; font-weight: 400; line-height: 20px; word-wrap: break-word">Seller</div>
+                            --%>                        
                         </div>
                     </div>
                     <div style="width: 296px; height: 0px; border: 1px #EBEEF7 solid"></div>
@@ -31,7 +27,7 @@
                             </div>
                             <div style="width: 208px; color: #767E94; font-size: 16px; font-family: Nunito; font-weight: 600; line-height: 24px; word-wrap: break-word">Orders Received</div>
                         </div>
-                        <a href="/myproduct" >
+                        <a href="/Add_Product" >
                             <div style="padding-left: 24px; padding-right: 24px; padding-top: 12px; padding-bottom: 12px; justify-content: center; align-items: center; gap: 16px; display: inline-flex">
                                 <div style="width: 24px; height: 24px; position: relative">
                                     <i class="far fa-plus-square" style="font-size: 24px;color:#767E94"></i>
@@ -39,13 +35,14 @@
                                 <div style="width: 208px; color: #767E94; font-size: 16px; font-family: Nunito; font-weight: 600; line-height: 24px; word-wrap: break-word">Post a Product</div>
                             </div>
                         </a>
-                        
-                        <div style="padding-left: 24px; padding-right: 24px; padding-top: 12px; padding-bottom: 12px; justify-content: center; align-items: center; gap: 16px; display: inline-flex">
-                            <div style="width: 24px; height: 24px; position: relative">
-                                <i class="fas fa-clipboard-list" style="font-size: 24px;color:#767E94"></i>
+                        <a href="/myproduct">
+                            <div style="padding-left: 24px; padding-right: 24px; padding-top: 12px; padding-bottom: 12px; justify-content: center; align-items: center; gap: 16px; display: inline-flex">
+                                <div style="width: 24px; height: 24px; position: relative">
+                                    <i class="fas fa-clipboard-list" style="font-size: 24px;color:#767E94"></i>
+                                </div>
+                                <div style="width: 208px; color: #767E94; font-size: 16px; font-family: Nunito; font-weight: 600; line-height: 24px; word-wrap: break-word">My Products</div>
                             </div>
-                            <div style="width: 208px; color: #767E94; font-size: 16px; font-family: Nunito; font-weight: 600; line-height: 24px; word-wrap: break-word">My Products</div>
-                        </div>
+                        </a>
                         <div style="padding-left: 24px; padding-right: 24px; padding-top: 12px; padding-bottom: 12px; justify-content: center; align-items: center; gap: 16px; display: inline-flex">
                             <div style="width: 24px; height: 24px; position: relative">
                                 <i class="fas fa-cog" style="font-size: 24px;color: #767E94;"></i>

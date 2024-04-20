@@ -141,8 +141,8 @@ public class NewServlet extends HttpServlet {
                 productId = UserServiceImpl.getInstance().AddProduct(Name, Prize, Stock, id);
                 System.out.println("please");
                 request.setAttribute("productId", productId);
-                System.out.println("product id before cookiee: "+productId);
-                Cookie cookieee = new Cookie("productId", productId+"");
+                System.out.println("product id before cookiee: " + productId);
+                Cookie cookieee = new Cookie("productId", productId + "");
                 cookieee.setMaxAge(3600); // Cookie will expire in 1 hour (you can adjust this as needed)
                 response.addCookie(cookieee);
                 //session.setAttribute("product_id", loggedInUser.getId());
@@ -168,7 +168,7 @@ public class NewServlet extends HttpServlet {
                     for (Cookie cookieee : cookies) {
                         if (cookieee.getName().equals("productId")) {
                             id = cookieee.getValue();
-                            System.out.println("product id servlet "+id);
+                            System.out.println("product id servlet " + id);
                             // Use the userID here
                             break;
                         }
@@ -179,7 +179,7 @@ public class NewServlet extends HttpServlet {
                 UserServiceImpl.getInstance().AddProductdesc(id, Type_Product, Feature, description_product);
                 System.out.println("please");
                 System.out.println("work please");
-                request.getRequestDispatcher("/WEB-INF/Pages/sellerAccountsection.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/Pages/ProductPostedSucessfully.jsp").forward(request, response);
             }
         } else if (uri.equals("/cart")) {
             request.getRequestDispatcher("/WEB-INF/Pages/cart.jsp").forward(request, response);
@@ -188,7 +188,26 @@ public class NewServlet extends HttpServlet {
         } else if (uri.equals("/sellersection")) {
             request.getRequestDispatcher("/WEB-INF/Pages/sellersection.jsp").forward(request, response);
         } else if (uri.equals("/myproduct")) {
-            request.getRequestDispatcher("/WEB-INF/Pages/PostProduct1.jsp").forward(request, response);
+            String sellerId = "";// Assuming sellerId is passed as a parameter
+
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("id")) {
+                        sellerId = cookie.getValue();
+                        // Use the userID here
+                        break;
+                    }
+                }
+            }
+            System.out.println(sellerId);
+// Retrieve the list of products for the seller
+            List<Product> productList = UserServiceImpl.getInstance().ListProducts(sellerId);
+            // Set the productList as a request attribute
+            request.setAttribute("productList", productList);
+            // Forward the request to your JSP page
+            System.out.println(productList);
+            request.getRequestDispatcher("/WEB-INF/Pages/allProductsListedBySeller.jsp").forward(request, response);
         }
     }
 

@@ -1,16 +1,13 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="com.mycompany.dbms.Usermodel.Product" %>
-<!DOCTYPE html>
+
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Seller Product page</title>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet"/>
         <%@include file="Navbar.jsp" %>
-        <%
-   List<Product> productList = (List<Product>) request.getAttribute("productList");
-        %>
     </head>
     <body>
         <form action="/myproduct" method="post" name="myproduct" class="form">
@@ -39,16 +36,36 @@
                         </div>
                         <div style="width: 996px; height: 563px; position: relative">
                             <div style="padding-bottom: 20px; left: 0px; top: 0px; position: absolute; background: white; box-shadow: 0px -1px 0px #EBEEF7 inset; justify-content: center; align-items: center; gap: 24px; display: inline-flex">
-
                                 <div style="width: 328px; color: #464D61; font-size: 14px; font-family: Nunito; font-weight: 600; line-height: 20px; word-wrap: break-word">Products</div>
                                 <div style="width: 132px; color: #464D61; font-size: 14px; font-family: Nunito; font-weight: 600; line-height: 20px; word-wrap: break-word">Date</div>
                                 <div style="width: 132px; color: #464D61; font-size: 14px; font-family: Nunito; font-weight: 600; line-height: 20px; word-wrap: break-word">Prices</div>
                                 <div style="width: 132px; color: #464D61; font-size: 14px; font-family: Nunito; font-weight: 600; line-height: 20px; word-wrap: break-word">Status</div>
                                 <div style="width: 164px; color: #464D61; font-size: 14px; font-family: Nunito; font-weight: 600; line-height: 20px; word-wrap: break-word">Action</div>
-
                             </div>
-                            
                         </div>
+                        <% 
+            // Retrieve the productList from request attribute
+            List<Product> productList = (List<Product>) request.getAttribute("productList");
+            
+            // Iterate over the productList and display product details
+            for (Product product : productList) {
+                        %>
+                        <<div style="margin-bottom: 20px;"> <!-- Add margin to separate each product -->
+                            <div style="width: 328px; color: #464D61; font-size: 14px; font-family: Nunito; font-weight: 600; line-height: 20px; word-wrap: break-word">
+                                <%= product.getId() %>
+                            </div>
+                            <div style="width: 132px; color: #464D61; font-size: 14px; font-family: Nunito; font-weight: 600; line-height: 20px; word-wrap: break-word">
+                                <%= product.getName() %>
+                            </div>
+                            <div style="width: 132px; color: #464D61; font-size: 14px; font-family: Nunito; font-weight: 600; line-height: 20px; word-wrap: break-word">
+                                <%= product.getPrize() %>
+                            </div>
+                            <div style="width: 132px; color: #464D61; font-size: 14px; font-family: Nunito; font-weight: 600; line-height: 20px; word-wrap: break-word">
+                                <%= product.getStock() %>
+                            </div>
+                        </div>
+                        <% } %>
+
                     </div>
                     <%@include file="sellersection.jsp" %>
                 </div>
@@ -61,3 +78,4 @@
     </script>
 </body>
 </html>
+

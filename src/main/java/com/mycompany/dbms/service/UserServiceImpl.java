@@ -80,20 +80,17 @@ public class UserServiceImpl implements UserService {
     public List<Product> ListProducts(String seller_id) {
         Product product = new Product();
         product.setSeller(Integer.parseInt(seller_id));
-        UsersDAO.getInstance().allProductbyseller(seller_id);
-        return null;
+        return UsersDAO.getInstance().allProductbyseller(seller_id);
+        //return null;
     }
 
     @Override
     public void AddProductdesc(String product_id, String type_product, String feature, String description_product) {
         description desc = new description();
         if (product_id == null || product_id.isEmpty()) {
-            // Handle the case where product_id is not provided
             System.out.println("Product ID is not provided.");
             return;
         }
-
-        // Convert product_id to an integer
         int productId = Integer.parseInt(product_id);
         desc.setProduct_id(productId);
         desc.setFeature(feature);

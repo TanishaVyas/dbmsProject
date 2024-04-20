@@ -25,6 +25,5 @@
         <a href = "/Main">button </a>
         <a href="/cart">cart</a>
         <a href="/accountsection">account section</a>
-        <a href="/myproduct">product</a>
     </body>
 </html>
