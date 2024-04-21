@@ -6,7 +6,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Something Went Wrong</h1>
+        <h1>Something Went Wrong f</h1>
         <h2>Error: ${errorMessage}</h2>
     </body>
 </html>
