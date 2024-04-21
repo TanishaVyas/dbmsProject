@@ -147,8 +147,7 @@
                     <div id="menu-time" class="menu-data animate__animated ">
                         <a onclick="closebar()"><i id="close" class="size fa-solid fa-xmark"></i></a>
                         <a href="/">Home</a>
-                        <a href="">About Us</a>
-                        <a href="">Search</a>
+                        <a href="/cart">Cart</a>
                         <a href="/login">Login</a>
                     </div>
                     <a id="Menu-bar" onclick="menubar()"><i class="size-icon fa-solid fa-bars"></i></a>

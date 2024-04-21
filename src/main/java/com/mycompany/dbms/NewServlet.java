@@ -6,6 +6,8 @@ package com.mycompany.dbms;
 
 import com.mycompany.dbms.Usermodel.Product;
 import com.mycompany.dbms.Usermodel.Trial;
+import com.mycompany.dbms.Usermodel.allproduct;
+import com.mycompany.dbms.Usermodel.cart;
 import com.mycompany.dbms.exception.AuthException;
 import com.mycompany.dbms.service.UserServiceImpl;
 import com.mycompany.dbms.usersDAO.UsersDAO;
@@ -38,7 +40,7 @@ public class NewServlet extends HttpServlet {
         String uri = request.getRequestURI();
 
         if (uri.equals("/")) {
-            request.getRequestDispatcher("/WEB-INF/Pages/Index.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/Pages/home.jsp").forward(request, response);
         } else if (uri.equals("/Main")) {
 
             request.setAttribute("welcome", "Dumbass");
@@ -87,7 +89,12 @@ public class NewServlet extends HttpServlet {
                         loggedInUser = UserServiceImpl.getInstance().Auth(username, password);
                         HttpSession session = request.getSession();
                         session.setAttribute("user", loggedInUser);
-                        request.getRequestDispatcher("/WEB-INF/Pages/profilePage.jsp").forward(request, response);
+                        session.setAttribute("id", loggedInUser.getId());
+                        System.out.println(loggedInUser.getId());
+                        Cookie cookie = new Cookie("id", loggedInUser.getId().toString());
+                        cookie.setMaxAge(3600); // Cookie will expire in 1 hour (you can adjust this as needed)
+                        response.addCookie(cookie);
+                        request.getRequestDispatcher("/WEB-INF/Pages/customersection.jsp").forward(request, response);
                     } catch (AuthException ex) {
                         request.setAttribute("errorMessage", ex.getMessage());
                         request.getRequestDispatcher("/WEB-INF/Pages/Error.jsp").forward(request, response);
@@ -181,21 +188,13 @@ public class NewServlet extends HttpServlet {
                 System.out.println("work please");
                 request.getRequestDispatcher("/WEB-INF/Pages/ProductPostedSucessfully.jsp").forward(request, response);
             }
-        } else if (uri.equals("/cart")) {
-            request.getRequestDispatcher("/WEB-INF/Pages/cart.jsp").forward(request, response);
-        } else if (uri.equals("/accountsection")) {
-            request.getRequestDispatcher("/WEB-INF/Pages/sellerAccountsection.jsp").forward(request, response);
-        } else if (uri.equals("/sellersection")) {
-            request.getRequestDispatcher("/WEB-INF/Pages/sellersection.jsp").forward(request, response);
         } else if (uri.equals("/myproduct")) {
-            String sellerId = "";// Assuming sellerId is passed as a parameter
-
+            String sellerId = "";
             Cookie[] cookies = request.getCookies();
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
                     if (cookie.getName().equals("id")) {
                         sellerId = cookie.getValue();
-                        // Use the userID here
                         break;
                     }
                 }
@@ -208,6 +207,136 @@ public class NewServlet extends HttpServlet {
             // Forward the request to your JSP page
             System.out.println(productList);
             request.getRequestDispatcher("/WEB-INF/Pages/allProductsListedBySeller.jsp").forward(request, response);
+        } else if (uri.equals("/AddToCart")) {
+            // Retrieve product details from request parameters
+            String productId = request.getParameter("productId");
+            String productName = request.getParameter("productName");
+            String productDescription = request.getParameter("productDescription");
+            String productFeatures = request.getParameter("productFeatures");
+            String productPrice = request.getParameter("productPrice");
+            String id = "";
+            //System.out.println("productenter");
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("id")) {
+                        id = cookie.getValue();
+                        // Use the userID here
+                        break;
+                    }
+                }
+            }
+            System.out.println("custoomer id" + id);
+            System.out.println("Product ID: " + productId);
+            System.out.println("Product Name: " + productName);
+            System.out.println("Product Description: " + productDescription);
+            System.out.println("Product Features: " + productFeatures);
+            System.out.println("Product Price: " + productPrice);
+            UserServiceImpl.getInstance().addingtocart(id, productId, "1", productName, productPrice);
+            response.sendRedirect("/accountsection");
+        } else if (uri.equals("/cart")) {
+            String id = "";
+            //System.out.println("productenter");
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("id")) {
+                        id = cookie.getValue();
+                        break;
+                    }
+                }
+            }
+            System.out.println("custoomer id" + id);
+            List<cart> productList = UserServiceImpl.getInstance().ListAllProductsCart(id);
+            request.setAttribute("allproductList", productList);
+            System.out.println(productList);
+            request.getRequestDispatcher("/WEB-INF/Pages/cart.jsp").forward(request, response);
+        } else if (uri.equals("/buy")) {
+            String method = request.getMethod();
+            System.out.println("buy:   line 256 " + method);
+            if (method.equals("GET")) {
+                request.getRequestDispatcher("/WEB-INF/Pages/cart.jsp").forward(request, response);
+            } else {
+                String id = "";
+                // Retrieve user ID from cookies
+                Cookie[] cookies = request.getCookies();
+                if (cookies != null) {
+                    for (Cookie cookie : cookies) {
+                        if (cookie.getName().equals("id")) {
+                            id = cookie.getValue();
+                            // Use the userID here
+                            break;
+                        }
+                    }
+                }
+                int billnumber = UserServiceImpl.getInstance().startbilling(id);
+                System.out.println("billno generested: "+billnumber);
+                if (billnumber != -1) {
+                    Cookie billcookie = new Cookie("billnumber", String.valueOf(billnumber));
+                    billcookie.setMaxAge(3600);
+                    response.addCookie(billcookie);
+                    response.sendRedirect("/billing");
+                    //request.getRequestDispatcher("/WEB-INF/Pages/billing.jsp").forward(request, response);
+                } else {
+                    response.sendRedirect("/error");
+                }
+            }
+        } else if (uri.equals("/accountsection")) {
+            List<allproduct> allproductsList = UserServiceImpl.getInstance().Listallproducts();
+            request.setAttribute("allproductsList", allproductsList);
+            System.out.println(allproductsList);
+            request.getRequestDispatcher("/WEB-INF/Pages/eachprod.jsp").forward(request, response);
+        } else if (uri.equals("/sellersection")) {
+            request.getRequestDispatcher("/WEB-INF/Pages/sellersection.jsp").forward(request, response);
+        } else if (uri.equals("/selleraccountsection")) {
+            request.getRequestDispatcher("/WEB-INF/Pages/sellerAccountsection.jsp").forward(request, response);
+        } else if (uri.equals("/deleteseller")) {
+            String method = request.getMethod();
+            System.out.println("delete" + method);
+            if (method.equals("GET")) {
+                request.getRequestDispatcher("/WEB-INF/Pages/sellerAccountsection.jsp").forward(request, response);
+            } else {
+                String sellerId = "";
+                Cookie[] cookies = request.getCookies();
+                if (cookies != null) {
+                    for (Cookie cookie : cookies) {
+                        if (cookie.getName().equals("id")) {
+                            sellerId = cookie.getValue();
+                            break;
+                        }
+                    }
+                }
+                System.out.println(sellerId);
+                UserServiceImpl.getInstance().deleteseller(sellerId);
+                request.getRequestDispatcher("/WEB-INF/Pages/Login.jsp").forward(request, response);
+            }
+        } else if (uri.equals("/billing")) {
+            String method = request.getMethod();
+            System.out.println("bill" + method);
+            if (method.equals("GET")) {
+                request.getRequestDispatcher("/WEB-INF/Pages/billing.jsp").forward(request, response);
+            } else {
+                String billnoString = "";
+                // Retrieve user ID from cookies
+                Cookie[] cookies = request.getCookies();
+                if (cookies != null) {
+                    for (Cookie cookie : cookies) {
+                        if (cookie.getName().equals("billnumber")) {
+                            billnoString = cookie.getValue();
+                            break;
+                        }
+                    }
+                }
+                System.out.println(billnoString);
+                int bill = UserServiceImpl.getInstance().totalbillprice(billnoString);
+                String firstname = request.getParameter("firstname");
+                String lastname = request.getParameter("lastname");
+                String address = request.getParameter("address");
+                String phone = request.getParameter("phone_number");
+                String total = String.valueOf(bill);
+                UserServiceImpl.getInstance().addshippinginfo(billnoString, firstname, lastname, address, phone, total);
+                request.getRequestDispatcher("/WEB-INF/Pages/Main.jsp").forward(request, response);
+            }
         }
     }
 

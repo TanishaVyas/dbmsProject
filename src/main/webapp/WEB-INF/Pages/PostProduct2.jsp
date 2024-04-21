@@ -49,6 +49,7 @@
                             <option value="egl tools" style="left: 18px; top: 12px; position: absolute; color: #939AAD; font-size: 16px; font-family: Nunito; font-weight: 400; line-height: 24px; word-wrap: break-word" >EGL Tools</option>
                             <option value="textbooks & notes" style="left: 18px; top: 12px; position: absolute; color: #939AAD; font-size: 16px; font-family: Nunito; font-weight: 400; line-height: 24px; word-wrap: break-word">Textbooks & Notes</option>
                             <option value="electronic equipment" style="left: 18px; top: 12px; position: absolute; color: #939AAD; font-size: 16px; font-family: Nunito; font-weight: 400; line-height: 24px; word-wrap: break-word">Electronic Equipment</option>
+                            <option value="Accessories" style="left: 18px; top: 12px; position: absolute; color: #939AAD; font-size: 16px; font-family: Nunito; font-weight: 400; line-height: 24px; word-wrap: break-word">Accessories</option>
                         </select>
                     </div>
                 </div>

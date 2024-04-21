@@ -2,7 +2,10 @@ package com.mycompany.dbms.service;
 
 import com.mycompany.dbms.Usermodel.Product;
 import com.mycompany.dbms.Usermodel.Trial;
+import com.mycompany.dbms.Usermodel.allproduct;
+import com.mycompany.dbms.Usermodel.cart;
 import com.mycompany.dbms.Usermodel.description;
+import com.mycompany.dbms.Usermodel.shipping;
 import com.mycompany.dbms.exception.AuthException;
 import com.mycompany.dbms.usersDAO.UsersDAO;
 import java.util.List;
@@ -68,11 +71,9 @@ public class UserServiceImpl implements UserService {
         Product product = new Product();
         product.setName(Name);
         System.out.println(seller + stock + prize);
-
         product.setPrize(Integer.parseInt(prize));
         product.setStock(Integer.parseInt(stock));
         product.setSeller(Integer.parseInt(seller));
-
         return UsersDAO.getInstance().addProduct(product);
     }
 
@@ -97,5 +98,67 @@ public class UserServiceImpl implements UserService {
         desc.setDescription_product(description_product);
         desc.setType_product(type_product);
         UsersDAO.getInstance().addProductdesc(desc);
+    }
+
+    @Override
+    public List<allproduct> Listallproducts() {
+        return UsersDAO.getInstance().allproductslist();
+    }
+
+    @Override
+    public void addingtocart(String customerId, String productId, String quantity, String name, String price) {
+        cart Cart =new cart();
+        int CustomerId = !customerId.isEmpty() ? Integer.parseInt(customerId) : 0;
+        int ProductId =Integer.parseInt(productId);
+        int Quantity =Integer.parseInt(quantity);
+        int Price = Integer.parseInt(price);
+        
+        Cart.setCustomerId(CustomerId);
+        Cart.setName(name);
+        Cart.setProductId(ProductId);
+        Cart.setPrice(Price);
+        Cart.setQuantity(Quantity);
+        
+        
+        UsersDAO.getInstance().addToCart(Cart);
+    }
+
+    @Override
+    public List<cart> ListAllProductsCart(String customer_id) {
+        cart Cart = new cart();
+        Cart.setCustomerId(Integer.parseInt(customer_id));
+        int customerid = Integer.parseInt(customer_id);
+        return UsersDAO.getInstance().allproductscart(customerid);
+    
+    }
+
+    @Override
+    public int startbilling(String customerId) {
+        int customerid = Integer.parseInt(customerId);
+        return UsersDAO.getInstance().callProcessBilling(customerid);
+    }
+
+    @Override
+    public void deleteseller(String sellerid) {
+       int seller_id = Integer.parseInt(sellerid);
+       UsersDAO.getInstance().deletesellerid(seller_id);
+    }
+
+    @Override
+    public int totalbillprice(String billno) {
+        int bill_no = Integer.parseInt(billno);
+        return UsersDAO.getInstance().calctotal(bill_no);
+    }
+
+    @Override
+    public void addshippinginfo(String billno,String firstname,String lastname, String address, String phonenumber, String total) {
+        shipping info = new shipping();
+        info.setBillno(Integer.parseInt(billno));
+        info.setFirstname(firstname);
+        info.setLastname(lastname);
+        info.setPhonenumber(Integer.parseInt(phonenumber));
+        info.setAddress(address);
+        info.setTotal(Integer.parseInt(total));
+        UsersDAO.getInstance().addshippinginfo(info);
     }
 }

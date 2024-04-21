@@ -1,4 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="java.util.List" %>
+<%@ page import="com.mycompany.dbms.Usermodel.cart" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -8,84 +11,136 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css">
         <%@include file="Navbar.jsp" %>
         <style>
-    .arrow-left {
-  display: inline-block;
-  width: 40px;
-  color: #2DA5F3;
-  font-style: normal;
-  font-weight: bold;
-  text-align: center;
-}
-.arrow-right {
-  display: inline-block;
-  width: 40px;
-  color: white;
-  font-style: normal;
-  font-weight: bold;
-  text-align: center;
-.arrow-left::before { content: "\2190"; }
-.arrow-right::after { content: "\2192"; }
-  </style>
+            .product-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 20px;
+            }
+
+            .product-table th,
+            .product-table td {
+                padding: 10px;
+                text-align: left;
+            }
+
+            .product-table th {
+                background-color: #4D47C3;
+                color: #fff;
+            }
+
+            .product-row td {
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+
+            .arrow-left {
+                display: inline-block;
+                width: 40px;
+                color: #2DA5F3;
+                font-style: normal;
+                font-weight: bold;
+                text-align: center;
+            }
+
+            .arrow-right {
+                display: inline-block;
+                width: 40px;
+                color: white;
+                font-style: normal;
+                font-weight: bold;
+                text-align: center;
+            }
+
+            .arrow-left::before {
+                content: "\2190";
+            }
+
+            .arrow-right::after {
+                content: "\2192";
+            }
+        </style>
     </head>
     <body>
-        <form action="/cart" method="post" name="cart"  class="form">
+        <form action="/buy" method="post" name="cart" class="form">
             <div class="action">
-        <div style="width: 1440px; height: 829px; position: relative; background: white">
-  <div style="height: 88px; left: -521px; top: 16px; position: absolute; background: white"></div>
-  
-  <div style="left: 40px; top: 138px; position: absolute; background: white; border-radius: 4px; border: 1px #E4E7E9 solid; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
-    <div style="padding-left: 24px; padding-right: 24px; padding-top: 20px; padding-bottom: 20px; justify-content: flex-start; align-items: flex-start; gap: 10px; display: inline-flex">
-      <div style="width: 824px; color: #191C1F; font-size: 18px; font-family: Public Sans; font-weight: 500; line-height: 24px; word-wrap: break-word">Shopping Cart</div>
-    </div>
-    <div style="padding-left: 24px; padding-right: 24px; padding-top: 10px; padding-bottom: 10px; background: #F2F4F5; border: 1px #E4E7E9 solid; justify-content: flex-start; align-items: center; gap: 24px; display: inline-flex">
-      <div style="width: 380px; color: #475156; font-size: 12px; font-family: Public Sans; font-weight: 500; text-transform: uppercase; line-height: 18px; word-wrap: break-word">Products</div>
-      <div style="width: 88px; color: #475156; font-size: 12px; font-family: Public Sans; font-weight: 500; text-transform: uppercase; line-height: 18px; word-wrap: break-word">Price</div>
-      <div style="width: 172px; color: #475156; font-size: 12px; font-family: Public Sans; font-weight: 500; text-transform: uppercase; line-height: 18px; word-wrap: break-word">Quantity</div>
-      <div style="width: 112px; color: #475156; font-size: 12px; font-family: Public Sans; font-weight: 500; text-transform: uppercase; line-height: 18px; word-wrap: break-word">Sub-Total</div>
-    </div>
-    <div style="width: 872px; height: 0px; border: 1px #E4E7E9 solid"></div>
-    <div style="width: 872px; padding: 24px; justify-content: space-between; align-items: center; display: inline-flex">
-      <div style="padding-left: 24px; padding-right: 24px; border-radius: 2px; border: 2px #2DA5F3 solid; justify-content: center; align-items: center; gap: 8px; display: flex">
-        <div><i class="fas fa-arrow-left arrow-left"></i></div>
-        <a href="#" style="color: #2DA5F3; font-size: 14px; font-family: Public Sans; font-weight: 700; text-transform: uppercase; line-height: 48px; letter-spacing: 0.17px;text-decoration: none; word-wrap: break-word"> Return to Shop</a>
-      </div>
-      <div style="padding-left: 24px; padding-right: 24px; border-radius: 2px; border: 2px #2DA5F3 solid; justify-content: center; align-items: center; gap: 8px; display: flex">
-        <a href="#" style="color: #2DA5F3; font-size: 14px; font-family: Public Sans; font-weight: 700; text-transform: uppercase; line-height: 48px; letter-spacing: 0.17px;text-decoration: none; word-wrap: break-word">Update cart</a>
-      </div>
-    </div>
-  </div>
-  <div style="padding-bottom: 24px; left: 989px; top: 140px; position: absolute; background: white; border-radius: 4px; overflow: hidden; border: 1px #E4E7E9 solid; flex-direction: column; justify-content: center; align-items: center; display: inline-flex">
-    <div style="padding-left: 24px; padding-right: 24px; padding-top: 20px; padding-bottom: 20px; justify-content: flex-start; align-items: flex-start; gap: 10px; display: inline-flex">
-      <div style="width: 376px; color: #191C1F; font-size: 18px; font-family: Public Sans; font-weight: 500; line-height: 24px; word-wrap: break-word">Cart Totals</div>
-    </div>
-    <div style="padding-bottom: 24px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 16px; display: flex">
-      <div style="padding-bottom: 4px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 12px; display: flex">
-        <div style="width: 376px; justify-content: space-between; align-items: center; display: inline-flex">
-          <div style="color: #5F6C72; font-size: 14px; font-family: Public Sans; font-weight: 400; line-height: 20px; word-wrap: break-word">Sub-total</div>
-          <div style="color: #191C1F; font-size: 14px; font-family: Public Sans; font-weight: 500; line-height: 20px; word-wrap: break-word">      </div>
-        </div>
-        <div style="justify-content: flex-start; align-items: center; gap: 218px; display: inline-flex">
-          <div style="color: #5F6C72; font-size: 14px; font-family: Public Sans; font-weight: 400; line-height: 20px; word-wrap: break-word">Shipping</div>
-        </div>
-        <div style="justify-content: flex-start; align-items: center; gap: 218px; display: inline-flex">
-          <div style="color: #5F6C72; font-size: 14px; font-family: Public Sans; font-weight: 400; line-height: 20px; word-wrap: break-word">Discount</div>
-        </div>
-        <div style="justify-content: flex-start; align-items: center; gap: 218px; display: inline-flex">
-          <div style="color: #5F6C72; font-size: 14px; font-family: Public Sans; font-weight: 400; line-height: 20px; word-wrap: break-word">Tax</div>
-        </div>
-      </div>
-      <div style="width: 376px; height: 0px; border: 1px #E4E7E9 solid"></div>
-      <div style="justify-content: flex-start; align-items: center; gap: 218px; display: inline-flex">
-        <div style="color: #191C1F; font-size: 16px; font-family: Public Sans; font-weight: 400; line-height: 24px; word-wrap: break-word">Total</div>
-      </div>
-    </div>
-    <div style="width: 376px; padding-left: 32px; padding-right: 32px; background: #FA8232; border-radius: 3px; justify-content: center; align-items: center; gap: 12px; display: inline-flex">
-      <a href="#" style="color: white; font-size: 16px; font-family: Public Sans; font-weight: 700; text-transform: uppercase; line-height: 56px; letter-spacing: 0.19px;text-decoration: none; word-wrap: break-word">Proceed to Checkout</a>
-      <div><i class="fas fa-arrow-right arrow-right"></i></div>
-    </div>
-  </div>
-</div>
-</div>
+                <div style="width: 1440px;
+                     height: 829px;
+                     position: relative;
+                     background: white">
+                    <!-- Cart Items -->
+                    <div style="left: 40px;
+                         top: 138px;
+                         position: absolute;
+                         background: white;
+                         border-radius: 4px;
+                         display: flex;
+                         flex-direction: column;">
+                        <!-- Cart Header -->
+                        <div style="padding: 20px;
+                             gap: 10px;
+                             display: flex;
+                             align-items: center;
+                             background: #F2F4F5;">
+                            <div style="width: 200px;">Product ID</div>
+                            <div style="width: 400px;">Name</div>
+                            <div style="width: 100px;">Quantity</div>
+                            <div style="width: 100px;">Price</div>
+                        </div>
+                        <!-- Cart Items List -->
+                        <div class="product-table">
+                            <table>
+                                <tbody>
+                                    <!-- Iterate over cart items -->
+                                    <% 
+                                        List<cart> productList = (List<cart>) request.getAttribute("allproductList");
+                                        if (productList != null) {
+                                            for (cart product : productList) { %>
+                                    <tr class="product-row">
+                                        <td style="width: 200px;"><%= product.getProductId() %></td>
+                                        <td style="width: 400px;"><%= product.getName() %></td>
+                                        <td style="width: 100px;"><%= product.getQuantity() %></td>
+                                        <td style="width: 100px;"><%= product.getPrice() %></td>
+                                    </tr>
+                                    <%     }
+                            } else { %>
+                                    <tr>
+                                        <td colspan="5">No products available</td>
+                                    </tr>
+                                    <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- Cart Controls -->
+                    <div style="padding: 24px;
+                         justify-content: space-between;
+                         align-items: center;
+                         display: flex;">
+                        <div style="padding: 8px;
+                             border-radius: 2px;
+                             border: 2px #2DA5F3 solid;
+                             display: flex;
+                             align-items: center;">
+                            <div><i class="fas fa-arrow-left arrow-left"></i></div>
+                            <a href="/accountsection" style="color: #2DA5F3;
+                               font-size: 14px;
+                               font-family: Public Sans;
+                               font-weight: 700;
+                               text-transform: uppercase;
+                               line-height: 48px;
+                               letter-spacing: 0.17px;
+                               text-decoration: none;">
+                                Return to Shop
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Buy button -->
+            <div style="padding: 24px; justify-content: center; align-items: center; display: flex;">
+                <button  href="/buy" type="submit" style="padding: 8px 16px; border: none; background-color: #2DA5F3; color: white; font-size: 16px; font-weight: bold; text-transform: uppercase; cursor: pointer;">Buy Now</button>
+            </div>
         </form>
+
     </body>
 </html>

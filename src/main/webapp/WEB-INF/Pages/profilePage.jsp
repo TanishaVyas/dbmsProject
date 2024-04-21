@@ -83,7 +83,9 @@
 
 <body>
     <div class="container">
-        
+        <a href="/accountsection">prduct hopefully</a>
+        <a href="/cart">cart</a>
+        <a href="/billing">billing</a>
         <h1>User Profile</h1>
        
          <%
