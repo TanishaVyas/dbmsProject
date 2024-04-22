@@ -12,7 +12,6 @@
         %>
     </head>
     <body>
-
         <div class="action">
             <div style="width: 1440px; height: 1385px; position: relative; background: white">
                 <div style="left: 450px; top: 90px; position: absolute; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 32px; display: inline-flex">

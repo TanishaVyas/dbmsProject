@@ -121,6 +121,7 @@
       <div style="width: 376px; height: 0px; border: 1px #E4E7E9 solid"></div>
       <div style="justify-content: flex-start; align-items: center; gap: 218px; display: inline-flex">
         <div style="color: #191C1F; font-size: 16px; font-family: Public Sans; font-weight: 400; line-height: 24px; word-wrap: break-word">Total</div>
+        <div style="color: #191C1F; font-size: 16px; font-family: Public Sans; font-weight: 400; line-height: 24px; word-wrap: break-word"><%= request.getAttribute("bill") %></div>
       </div>
     </div>
     

@@ -369,6 +369,23 @@ public class NewServlet extends HttpServlet {
             String method = request.getMethod();
             System.out.println("bill" + method);
             if (method.equals("GET")) {
+                String billnoString = "";
+                // Retrieve user ID from cookies
+                Cookie[] cookies = request.getCookies();
+                if (cookies != null) {
+                    for (Cookie cookie : cookies) {
+                        if (cookie.getName().equals("billnumber")) {
+                            billnoString = cookie.getValue();
+                            break;
+                        }
+                    }
+                }
+                System.out.println(billnoString);
+                int bill = UserServiceImpl.getInstance().totalbillprice(billnoString);
+                String total = String.valueOf(bill);
+ 
+                request.setAttribute("bill",total);
+                System.out.println(bill);
                 request.getRequestDispatcher("/WEB-INF/Pages/billing.jsp").forward(request, response);
             } else {
                 String billnoString = "";
@@ -384,11 +401,15 @@ public class NewServlet extends HttpServlet {
                 }
                 System.out.println(billnoString);
                 int bill = UserServiceImpl.getInstance().totalbillprice(billnoString);
+                
                 String firstname = request.getParameter("firstname");
                 String lastname = request.getParameter("lastname");
                 String address = request.getParameter("address");
                 String phone = request.getParameter("phone_number");
                 String total = String.valueOf(bill);
+ 
+                request.setAttribute("bill",total);
+                System.out.println(bill);
                 UserServiceImpl.getInstance().addshippinginfo(billnoString, firstname, lastname, address, phone, total);
                 response.sendRedirect("/orderplaced");
             }

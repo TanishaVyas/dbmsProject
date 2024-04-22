@@ -32,12 +32,7 @@
                     </div>
                     <div style="width: 296px; height: 0px; border: 1px #EBEEF7 solid"></div>
                     <div style="flex-direction: column; justify-content: flex-start; align-items: flex-start; display: flex">
-                        <div style="padding-left: 24px; padding-right: 24px; padding-top: 12px; padding-bottom: 12px; justify-content: center; align-items: center; gap: 16px; display: inline-flex">
-                            <div style="width: 24px; height: 24px; position: relative">
-                                <i class="fas fa-th-large"style="font-size: 24px;color:#767E94"></i>
-                            </div>
-                            <div style="width: 208px; color: #767E94; font-size: 16px; font-family: Nunito; font-weight: 600; line-height: 24px; word-wrap: break-word">Orders Received</div>
-                        </div>
+                        
                         <a href="/Add_Product" >
                             <div style="padding-left: 24px; padding-right: 24px; padding-top: 12px; padding-bottom: 12px; justify-content: center; align-items: center; gap: 16px; display: inline-flex">
                                 <div style="width: 24px; height: 24px; position: relative">
