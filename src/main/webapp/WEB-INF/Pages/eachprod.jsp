@@ -6,7 +6,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Product</title>
+        <title>Campus TradeX</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css">
         <%@include file="Navbar.jsp" %>
@@ -52,6 +52,23 @@
     </head>
     <body class="bg-gray-100">
         <div class="container mx-auto p-4">
+            <div style="padding: 8px;
+                 border-radius: 2px;
+                 border: 2px #2DA5F3 solid;
+                 display: flex;
+                 align-items: center;">
+                
+                <a href="/cart" style="color: #2DA5F3;
+                   font-size: 14px;
+                   font-family: Public Sans;
+                   font-weight: 700;
+                   text-transform: uppercase;
+                   line-height: 48px;
+                   letter-spacing: 0.17px;
+                   text-decoration: none;">
+                    Cart
+                </a>
+            </div>
             <table class="product-table">
                 <thead>
                     <tr>
@@ -73,7 +90,6 @@
                         <td>Price Rs. <%= product.getPrice() %></td>
                         <td class="action-links">
                             <a href="AddToCart?productId=<%= product.getProductId() %>&productName=<%= product.getName() %>&productDescription=<%= product.getDescription() %>&productFeatures=<%= product.getFeatures() %>&productPrice=<%= product.getPrice() %>">Add to Cart</a>
-                            <a href="#">Buy Now</a>
 
                         </td>
                     </tr>

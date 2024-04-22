@@ -6,7 +6,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Cart</title>
+        <title>Campus TradeX</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css">
         <%@include file="Navbar.jsp" %>
@@ -16,7 +16,10 @@
                 border-collapse: collapse;
                 margin-top: 20px;
             }
-
+            .action-links {
+                display: flex;
+                justify-content: space-between;
+            }
             .product-table th,
             .product-table td {
                 padding: 10px;
@@ -61,6 +64,22 @@
         </style>
     </head>
     <body>
+        <div style="padding: 8px;
+             border-radius: 2px;
+             border: 2px #2DA5F3 solid;
+             display: flex;
+             align-items: center;">                
+            <a href="/customerprof" style="color: #2DA5F3;
+               font-size: 14px;
+               font-family: Public Sans;
+               font-weight: 700;
+               text-transform: uppercase;
+               line-height: 48px;
+               letter-spacing: 0.17px;
+               text-decoration: none;">
+                Profile Page
+            </a>
+        </div>
         <form action="/buy" method="post" name="cart" class="form">
             <div class="action">
                 <div style="width: 1440px;
@@ -100,6 +119,9 @@
                                         <td style="width: 400px;"><%= product.getName() %></td>
                                         <td style="width: 100px;"><%= product.getQuantity() %></td>
                                         <td style="width: 100px;"><%= product.getPrice() %></td>
+                                        <td class="action-links">
+                                            <a style="color: black" href="RemovefromCart?productId=<%= product.getProductId() %>">Remove</a>
+                                        </td>
                                     </tr>
                                     <%     }
                             } else { %>

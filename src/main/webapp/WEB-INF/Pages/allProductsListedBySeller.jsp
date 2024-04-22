@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Seller Product page</title>
+        <title>Campus TradeX</title>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet"/>
         <%@include file="Navbar.jsp" %>
         <style>
@@ -79,7 +79,7 @@
                                 <div>Name</div>
                                 <div>Price</div>
                                 <div>Stock</div>
-                                <div>Action</div>
+                                
                             </div>
                             <table>
                                 <tbody>
@@ -95,7 +95,7 @@
                                         <td><%= product.getName() %></td>
                                         <td><%= product.getPrize() %></td>
                                         <td><%= product.getStock() %></td>
-                                        <td>Action</td>
+                                        
                                     </tr>
                                     <% } %>
                                 </tbody>

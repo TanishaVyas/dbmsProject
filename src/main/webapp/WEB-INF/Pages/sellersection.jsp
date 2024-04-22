@@ -4,8 +4,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Seller section</title>
+        <title>Campus TradeX</title>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet"/>
+     
     </head>
     <body>
         <form action="/sellersection" method="post" name="sellersection" class="form">
@@ -61,13 +62,14 @@
                                 <div style="width: 208px; color: #767E94; font-size: 16px; font-family: Nunito;text-decoration: none; font-weight: 600; line-height: 24px; word-wrap: break-word">Account Settings</div>
                             </div>
                         </a>
+                        <a href="/logout">
                         <div style="padding-left: 24px; padding-right: 24px; padding-top: 12px; padding-bottom: 12px; display: flex; align-items: center; gap: 16px;">
                             <div style="width: 24px; height: 24px; color: #767E94;">
                                 <i class="fas fa-sign-out-alt" style="width: 100%; height: 100%; font-size: 24px;"></i>
                             </div>
                             <div style="color: #767E94; font-size: 16px; font-family: Nunito; font-weight: 600; line-height: 24px; word-wrap: break-word; max-width: 208px;">Sign Out</div>
                         </div>
-
+                        </a>
                     </div>
                 </div>
         </form>

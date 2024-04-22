@@ -47,7 +47,7 @@ public class UsersDAO {
         } catch (SQLException ex) {
             Logger.getLogger(UsersDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
     }
 
     public void saveSeller(Trial user) {
@@ -118,7 +118,7 @@ public class UsersDAO {
 
     public int addProduct(Product user) {
         Connection connection = ConnectionConfigs.getConnection();
-        int productId = -1; // Default value for productId
+        int productId = -1; 
         try {
             Statement selectStatement = connection.createStatement();
             PreparedStatement pr = connection.prepareStatement("insert into product (Name, price, stock, seller_id) values (?, ?, ?, ?)");
@@ -305,7 +305,7 @@ public class UsersDAO {
         return productList;
     }
 
-    public void deletesellerid(int sellerid) {
+    public void deleteuserid(int sellerid) {
         Connection connection = ConnectionConfigs.getConnection();
         try {
             CallableStatement cs = connection.prepareCall("CALL DeleteSellerData(?)");
@@ -316,6 +316,18 @@ public class UsersDAO {
         }
     }
 
+    public void deleteuserid(String customerid) {
+         int customer_id = Integer.parseInt(customerid);
+        Connection connection = ConnectionConfigs.getConnection();
+        try {
+            CallableStatement cs = connection.prepareCall("CALL DeletecustomerData(?)");
+            cs.setInt(1, customer_id);
+            ResultSet rs = cs.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(UsersDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public int callProcessBilling(int customerId) {
         Connection connection = null;
         CallableStatement callableStatement = null;
@@ -356,5 +368,15 @@ public class UsersDAO {
         }
         return billno;
     }
-
+    public void removefromCart(int customer_id,int product_id){
+        Connection connection = ConnectionConfigs.getConnection();
+        try {
+            PreparedStatement pr = connection.prepareStatement("DELETE FROM cart WHERE customer_id = ? and product_id = ?");
+            pr.setInt(1, customer_id);
+            pr.setInt(2, product_id);            
+            pr.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
 }

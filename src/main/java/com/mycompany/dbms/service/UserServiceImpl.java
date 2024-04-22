@@ -141,7 +141,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteseller(String sellerid) {
        int seller_id = Integer.parseInt(sellerid);
-       UsersDAO.getInstance().deletesellerid(seller_id);
+       UsersDAO.getInstance().deleteuserid(seller_id);
     }
 
     @Override
@@ -160,5 +160,17 @@ public class UserServiceImpl implements UserService {
         info.setAddress(address);
         info.setTotal(Integer.parseInt(total));
         UsersDAO.getInstance().addshippinginfo(info);
+    }
+
+    @Override
+    public void deletecustomer(String customerid) {
+      UsersDAO.getInstance().deleteuserid(customerid);
+    }
+
+    @Override
+    public void removefromcart(String customerId, String productId) {
+        int customer_id =Integer.parseInt(customerId);
+        int product_id =Integer.parseInt(productId);
+        UsersDAO.getInstance().removefromCart(customer_id,product_id);
     }
 }

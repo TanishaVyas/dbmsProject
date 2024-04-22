@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <link rel="stylesheet" href="style.css" />
-        <title>Registration page</title>
+        <title>Campus TradeX</title>
     </head>
     <body style="background-color: #110929;">
         <form action="/Register" method="post" name="Register"  class="form">

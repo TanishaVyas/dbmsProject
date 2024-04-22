@@ -70,8 +70,10 @@ public class NewServlet extends HttpServlet {
                     httpSession.setAttribute("message", "Registration successful!!");
                     response.sendRedirect("/login");
                 }
-
             }
+        } else if (uri.equals("/logout")) {
+            request.getSession().invalidate();
+            response.sendRedirect("/");
         } else if (uri.equals("/login")) {
             String method = request.getMethod();
             System.out.println(method);
@@ -207,15 +209,31 @@ public class NewServlet extends HttpServlet {
             // Forward the request to your JSP page
             System.out.println(productList);
             request.getRequestDispatcher("/WEB-INF/Pages/allProductsListedBySeller.jsp").forward(request, response);
-        } else if (uri.equals("/AddToCart")) {
-            // Retrieve product details from request parameters
+        } else if(uri.equals("/RemovefromCart")){
+            String productId = request.getParameter("productId");
+            String id = "";
+            //System.out.println("productenter");
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("id")) {
+                        id = cookie.getValue();
+                        break;
+                    }
+                }
+            }
+            System.out.println("custoomer id" + id);
+            System.out.println("product id"+productId);
+            UserServiceImpl.getInstance().removefromcart(id, productId);
+            response.sendRedirect("/cart");
+        }
+        else if (uri.equals("/AddToCart")) {
             String productId = request.getParameter("productId");
             String productName = request.getParameter("productName");
             String productDescription = request.getParameter("productDescription");
             String productFeatures = request.getParameter("productFeatures");
             String productPrice = request.getParameter("productPrice");
             String id = "";
-            //System.out.println("productenter");
             Cookie[] cookies = request.getCookies();
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
@@ -225,7 +243,7 @@ public class NewServlet extends HttpServlet {
                         break;
                     }
                 }
-            }
+            }            
             System.out.println("custoomer id" + id);
             System.out.println("Product ID: " + productId);
             System.out.println("Product Name: " + productName);
@@ -234,7 +252,8 @@ public class NewServlet extends HttpServlet {
             System.out.println("Product Price: " + productPrice);
             UserServiceImpl.getInstance().addingtocart(id, productId, "1", productName, productPrice);
             response.sendRedirect("/accountsection");
-        } else if (uri.equals("/cart")) {
+        } 
+        else if (uri.equals("/cart")) {
             String id = "";
             //System.out.println("productenter");
             Cookie[] cookies = request.getCookies();
@@ -251,7 +270,8 @@ public class NewServlet extends HttpServlet {
             request.setAttribute("allproductList", productList);
             System.out.println(productList);
             request.getRequestDispatcher("/WEB-INF/Pages/cart.jsp").forward(request, response);
-        } else if (uri.equals("/buy")) {
+        } 
+        else if (uri.equals("/buy")) {
             String method = request.getMethod();
             System.out.println("buy:   line 256 " + method);
             if (method.equals("GET")) {
@@ -270,7 +290,7 @@ public class NewServlet extends HttpServlet {
                     }
                 }
                 int billnumber = UserServiceImpl.getInstance().startbilling(id);
-                System.out.println("billno generested: "+billnumber);
+                System.out.println("billno generested: " + billnumber);
                 if (billnumber != -1) {
                     Cookie billcookie = new Cookie("billnumber", String.valueOf(billnumber));
                     billcookie.setMaxAge(3600);
@@ -281,16 +301,28 @@ public class NewServlet extends HttpServlet {
                     response.sendRedirect("/error");
                 }
             }
-        } else if (uri.equals("/accountsection")) {
+        } 
+        else if (uri.equals("/accountsection")) {
             List<allproduct> allproductsList = UserServiceImpl.getInstance().Listallproducts();
             request.setAttribute("allproductsList", allproductsList);
             System.out.println(allproductsList);
             request.getRequestDispatcher("/WEB-INF/Pages/eachprod.jsp").forward(request, response);
-        } else if (uri.equals("/sellersection")) {
+        } 
+        else if (uri.equals("/sellersection")) {
             request.getRequestDispatcher("/WEB-INF/Pages/sellersection.jsp").forward(request, response);
-        } else if (uri.equals("/selleraccountsection")) {
+        } 
+        else if (uri.equals("/orderplaced")) {
+            request.getRequestDispatcher("/WEB-INF/Pages/orderplaced.jsp").forward(request, response);}
+        else if (uri.equals("/selleraccountsection")) {
             request.getRequestDispatcher("/WEB-INF/Pages/sellerAccountsection.jsp").forward(request, response);
-        } else if (uri.equals("/deleteseller")) {
+        } 
+        else if (uri.equals("/customerprof")) {
+            request.getRequestDispatcher("/WEB-INF/Pages/customersection.jsp").forward(request, response);
+        } 
+        else if (uri.equals("/accset")) {
+            request.getRequestDispatcher("/WEB-INF/Pages/custaccsettings.jsp").forward(request, response);
+        } 
+        else if (uri.equals("/deleteseller")) {
             String method = request.getMethod();
             System.out.println("delete" + method);
             if (method.equals("GET")) {
@@ -310,7 +342,30 @@ public class NewServlet extends HttpServlet {
                 UserServiceImpl.getInstance().deleteseller(sellerId);
                 request.getRequestDispatcher("/WEB-INF/Pages/Login.jsp").forward(request, response);
             }
-        } else if (uri.equals("/billing")) {
+
+        } 
+        else if (uri.equals("/deletecustomer")) {
+            String method = request.getMethod();
+            System.out.println("delete" + method);
+            if (method.equals("GET")) {
+                request.getRequestDispatcher("/WEB-INF/Pages/custaccsettings.jsp").forward(request, response);
+            } else {
+                String Id = "";
+                Cookie[] cookies = request.getCookies();
+                if (cookies != null) {
+                    for (Cookie cookie : cookies) {
+                        if (cookie.getName().equals("id")) {
+                            Id = cookie.getValue();
+                            break;
+                        }
+                    }
+                }
+                System.out.println(Id);
+                UserServiceImpl.getInstance().deletecustomer(Id);
+                request.getRequestDispatcher("/WEB-INF/Pages/Login.jsp").forward(request, response);
+            }
+        } 
+        else if (uri.equals("/billing")) {
             String method = request.getMethod();
             System.out.println("bill" + method);
             if (method.equals("GET")) {
@@ -335,7 +390,7 @@ public class NewServlet extends HttpServlet {
                 String phone = request.getParameter("phone_number");
                 String total = String.valueOf(bill);
                 UserServiceImpl.getInstance().addshippinginfo(billnoString, firstname, lastname, address, phone, total);
-                request.getRequestDispatcher("/WEB-INF/Pages/Main.jsp").forward(request, response);
+                response.sendRedirect("/orderplaced");
             }
         }
     }

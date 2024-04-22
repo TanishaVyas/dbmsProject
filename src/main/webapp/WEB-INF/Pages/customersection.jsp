@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Customer section Page</title>
+        <title>Campus TradeX</title>
     </head>
     <body>
         <form action="/customersection" method="post" name="customersection" class="form">
@@ -45,7 +45,7 @@
             <div style="width: 24px; height: 24px; position: relative">
                 <i class="fas fa-sign-out-alt" id="sign-out-icon" style="font-size: 24px;color:#767E94;"></i>
             </div>
-            <a href="/signout" style="width: 208px; color: #767E94; font-size: 16px; font-family: Nunito;text-decoration: none; font-weight: 600; line-height: 24px; word-wrap: break-word">Sign Out</a>
+            <a href="/logout" style="width: 208px; color: #767E94; font-size: 16px; font-family: Nunito;text-decoration: none; font-weight: 600; line-height: 24px; word-wrap: break-word">Sign Out</a>
         </div>
     </div>
 </div>

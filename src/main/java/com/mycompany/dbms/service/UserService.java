@@ -16,9 +16,11 @@ public interface UserService {
     public void AddProductdesc (String product_id, String type_product, String feature, String description_product);
     public List<allproduct> Listallproducts();
     public void addingtocart(String customerId, String productId, String quantity, String name, String price);
+    public void removefromcart(String customerId, String productId);
     public List<cart> ListAllProductsCart(String customer_id);
     public int startbilling (String customerId);
     public void deleteseller(String sellerid);
+    public void deletecustomer(String customerid);
     public int totalbillprice(String billno);
     public void addshippinginfo(String billno,String firstname,String lastname, String address, String phonenumber, String total);
 }
