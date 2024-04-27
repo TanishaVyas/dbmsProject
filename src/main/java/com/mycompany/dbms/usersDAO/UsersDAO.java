@@ -47,7 +47,7 @@ public class UsersDAO {
         } catch (SQLException ex) {
             Logger.getLogger(UsersDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 
     public void saveSeller(Trial user) {
@@ -118,7 +118,7 @@ public class UsersDAO {
 
     public int addProduct(Product user) {
         Connection connection = ConnectionConfigs.getConnection();
-        int productId = -1; 
+        int productId = -1;
         try {
             Statement selectStatement = connection.createStatement();
             PreparedStatement pr = connection.prepareStatement("insert into product (Name, price, stock, seller_id) values (?, ?, ?, ?)");
@@ -218,6 +218,96 @@ public class UsersDAO {
         return productList;
     }
 
+    public List<allproduct> allproductslist_egl() {
+        Connection connection = ConnectionConfigs.getConnection();
+        List<allproduct> productList = new ArrayList<>();
+        try {
+            PreparedStatement pr = connection.prepareStatement("SELECT product_id, name, price, stock, seller_id, type_product, feature, description_product FROM ProductWithSpecifications_egltools");
+            ResultSet rs = pr.executeQuery();
+            System.out.println(" query values");
+            try {
+                while (rs.next()) {
+                    int productId = rs.getInt(1);
+                    String name = rs.getString("name");
+                    int price = rs.getInt("price");
+                    int stock = rs.getInt("stock");
+                    int sellerId = rs.getInt("seller_id");
+                    String typeProduct = rs.getString("type_product");
+                    String features = rs.getString("feature");
+                    String description = rs.getString("description_product");
+                    allproduct product = new allproduct(productId, name, price, stock, sellerId, typeProduct, features, description);
+                    productList.add(product);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(UsersDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UsersDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println(productList);
+        return productList;
+    }
+
+    public List<allproduct> allproductslist_textbook() {
+        Connection connection = ConnectionConfigs.getConnection();
+        List<allproduct> productList = new ArrayList<>();
+        try {
+            PreparedStatement pr = connection.prepareStatement("SELECT product_id, name, price, stock, seller_id, type_product, feature, description_product FROM ProductWithSpecifications_textbooksnotes");
+            ResultSet rs = pr.executeQuery();
+            System.out.println(" query values");
+            try {
+                while (rs.next()) {
+                    int productId = rs.getInt(1);
+                    String name = rs.getString("name");
+                    int price = rs.getInt("price");
+                    int stock = rs.getInt("stock");
+                    int sellerId = rs.getInt("seller_id");
+                    String typeProduct = rs.getString("type_product");
+                    String features = rs.getString("feature");
+                    String description = rs.getString("description_product");
+                    allproduct product = new allproduct(productId, name, price, stock, sellerId, typeProduct, features, description);
+                    productList.add(product);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(UsersDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UsersDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println(productList);
+        return productList;
+    }
+
+    public List<allproduct> allproductslist_electronics() {
+        Connection connection = ConnectionConfigs.getConnection();
+        List<allproduct> productList = new ArrayList<>();
+        try {
+            PreparedStatement pr = connection.prepareStatement("SELECT product_id, name, price, stock, seller_id, type_product, feature, description_product FROM ProductWithSpecifications_electronicequipment");
+            ResultSet rs = pr.executeQuery();
+            System.out.println(" query values");
+            try {
+                while (rs.next()) {
+                    int productId = rs.getInt(1);
+                    String name = rs.getString("name");
+                    int price = rs.getInt("price");
+                    int stock = rs.getInt("stock");
+                    int sellerId = rs.getInt("seller_id");
+                    String typeProduct = rs.getString("type_product");
+                    String features = rs.getString("feature");
+                    String description = rs.getString("description_product");
+                    allproduct product = new allproduct(productId, name, price, stock, sellerId, typeProduct, features, description);
+                    productList.add(product);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(UsersDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UsersDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println(productList);
+        return productList;
+    }
+
     public void addToCart(cart Cart) {
         Connection connection = ConnectionConfigs.getConnection();
         try {
@@ -254,7 +344,7 @@ public class UsersDAO {
         int total = 0;
         try {
             PreparedStatement pr = connection.prepareStatement("SELECT calculate_total_price(?)");
-            pr.setInt(1,billno);
+            pr.setInt(1, billno);
             ResultSet rs = pr.executeQuery();
             System.out.println("Query executed");
             try {
@@ -317,7 +407,7 @@ public class UsersDAO {
     }
 
     public void deleteuserid(String customerid) {
-         int customer_id = Integer.parseInt(customerid);
+        int customer_id = Integer.parseInt(customerid);
         Connection connection = ConnectionConfigs.getConnection();
         try {
             CallableStatement cs = connection.prepareCall("CALL DeletecustomerData(?)");
@@ -327,7 +417,7 @@ public class UsersDAO {
             Logger.getLogger(UsersDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public int callProcessBilling(int customerId) {
         Connection connection = null;
         CallableStatement callableStatement = null;
@@ -343,7 +433,7 @@ public class UsersDAO {
 
             // Set input parameter
             callableStatement.setInt(1, customerId);
-            callableStatement.setInt(2,Types.INTEGER);
+            callableStatement.setInt(2, Types.INTEGER);
             // Execute the procedure
             callableStatement.execute();
             System.out.println("after");
@@ -368,15 +458,47 @@ public class UsersDAO {
         }
         return billno;
     }
-    public void removefromCart(int customer_id,int product_id){
+
+    public void removefromCart(int customer_id, int product_id) {
         Connection connection = ConnectionConfigs.getConnection();
         try {
             PreparedStatement pr = connection.prepareStatement("DELETE FROM cart WHERE customer_id = ? and product_id = ?");
             pr.setInt(1, customer_id);
-            pr.setInt(2, product_id);            
+            pr.setInt(2, product_id);
             pr.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+    }
+
+    public void reduceStock(int billno) {
+        Connection connection = ConnectionConfigs.getConnection();
+        try {
+            PreparedStatement pr = connection.prepareStatement("CALL reduceStock(?)");
+            pr.setInt(1, billno);
+            pr.executeUpdate();
+            System.out.println("Executeddddddddddd");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public boolean checkquantity(int productid, int req_quantity) {
+        Connection connection = ConnectionConfigs.getConnection();
+        boolean result = false;
+        try {
+            PreparedStatement pr = connection.prepareStatement("select checkAvailableQuantity(?,?)");
+            pr.setInt(1, productid);
+            pr.setInt(2, req_quantity);
+            ResultSet rs = pr.executeQuery();
+            while (rs.next()) {
+                result = rs.getBoolean(1);
+            }
+            System.out.println("Executed  quantity check");
+            return result;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return result;
     }
 }

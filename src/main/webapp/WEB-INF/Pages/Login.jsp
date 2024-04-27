@@ -28,7 +28,7 @@
                         <div style="width: 369px; height: 62px; left: 0px; top: 73px; position: absolute">
                             <div style="width: 369px; height: 62px; left: 0px; top: 0px; position: absolute">
                                 <div style="position: relative;">
-                                    <input id="username" name="Username" type="text" required class="w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="Enter Username">
+                                    <input id="username" name="Username" type="email" required class="w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="Enter Username">
                                 </div>
                             </div>
                         </div>

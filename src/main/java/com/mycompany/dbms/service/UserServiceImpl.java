@@ -110,7 +110,7 @@ public class UserServiceImpl implements UserService {
         cart Cart =new cart();
         int CustomerId = !customerId.isEmpty() ? Integer.parseInt(customerId) : 0;
         int ProductId =Integer.parseInt(productId);
-        int Quantity =Integer.parseInt(quantity);
+        int Quantity =!quantity.isEmpty() ? Integer.parseInt(quantity) : 1;
         int Price = Integer.parseInt(price);
         
         Cart.setCustomerId(CustomerId);
@@ -172,5 +172,33 @@ public class UserServiceImpl implements UserService {
         int customer_id =Integer.parseInt(customerId);
         int product_id =Integer.parseInt(productId);
         UsersDAO.getInstance().removefromCart(customer_id,product_id);
+    }
+
+    @Override
+    public void reduceproductstock(String billnoString) {
+        int billno = Integer.parseInt(billnoString);
+        UsersDAO.getInstance().reduceStock(billno);
+    }
+
+    @Override
+    public List<allproduct> Listallproducts_egltools() {
+        return UsersDAO.getInstance().allproductslist_egl();
+    }
+
+    @Override
+    public List<allproduct> Listallproducts_textbooks() {
+        return UsersDAO.getInstance().allproductslist_textbook();
+    }
+
+    @Override
+    public List<allproduct> Listallproducts_electronics() {
+        return UsersDAO.getInstance().allproductslist_electronics();
+    }
+
+    @Override
+    public boolean checkquantity(String productid, String req_quantity) {
+        int product_id = Integer.parseInt(productid);
+        int quantity = Integer.parseInt(req_quantity);
+        return UsersDAO.getInstance().checkquantity(product_id, quantity);
     }
 }

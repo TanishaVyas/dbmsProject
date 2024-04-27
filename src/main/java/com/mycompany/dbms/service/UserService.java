@@ -15,6 +15,9 @@ public interface UserService {
     public List<Product> ListProducts(String seller_id);
     public void AddProductdesc (String product_id, String type_product, String feature, String description_product);
     public List<allproduct> Listallproducts();
+    public List<allproduct> Listallproducts_egltools();
+    public List<allproduct> Listallproducts_textbooks();
+    public List<allproduct> Listallproducts_electronics();
     public void addingtocart(String customerId, String productId, String quantity, String name, String price);
     public void removefromcart(String customerId, String productId);
     public List<cart> ListAllProductsCart(String customer_id);
@@ -23,4 +26,6 @@ public interface UserService {
     public void deletecustomer(String customerid);
     public int totalbillprice(String billno);
     public void addshippinginfo(String billno,String firstname,String lastname, String address, String phonenumber, String total);
+    public void reduceproductstock( String billnoString);
+    public boolean checkquantity(String productid, String req_quantity);
 }
